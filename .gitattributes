@@ -1,0 +1,28 @@
+# Normalize text sources, but preserve generated frontend bytes exactly.
+* text=auto
+
+*.py text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.js text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.svg text eol=lf
+*.step text eol=lf
+
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary
+*.FCStd binary
+*.stl binary
+
+# Vite hashed assets must keep their exact bytes across checkout.
+frontend/dist/** -text
