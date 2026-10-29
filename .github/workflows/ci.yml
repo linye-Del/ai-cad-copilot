@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    name: Python ${{ matrix.python }} · 单元测试 + API 测试
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+          pip install -r requirements.txt
+
+      - name: Unit tests (规则引擎 / 公差 / SVG / API)
+        run: |
+          pytest tests/ -v --tb=short
+        env:
+          DEEPSEEK_API_KEY: ""
+
+      - name: Import smoke (全模块可导入)
+        run: |
+          python -c "
+          import config.settings, cad_engine.runner, cad_engine.drawing_svg
+          import cad_engine.mcp_server.server, agent.agent, agent.parser
+          import inspection.rules, inspection.tolerance_check, inspection.llm_check
+          import inspection.step_review, inspection.step_parser
+          import knowledge_base.rules, knowledge_base.gbt
+          import backend.main, backend.demo_service
+          print('ALL_MODULES_IMPORT_OK')
+          "
+
+  lint:
+    name: 语法检查（py_compile）
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Syntax check
+        run: |
+          python -m py_compile $(git ls-files '*.py') || find . -name "*.py" -not -path "./frontend/*" -not -path "./.git/*" -exec python -m py_compile {} +

@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "name": "AI CAD Copilot 3 分钟 Demo",
+    "description": "自然语言 → FreeCAD 三维模型 + 工程图 + AI 三重审查 完整流程演示",
+    "duration_sec": 180,
+    "usage": "python scripts/demo.py --http 8000 [--case 1|2]"
+  },
+  "cases": [
+    {
+      "id": "bolt",
+      "name": "六角头螺栓（快速演示，推荐）",
+      "input": "生成一个M10×40的六角头螺栓，8.8级，螺纹长度25mm，材料40Cr，表面发黑",
+      "expected": {
+        "part_type": "bolt",
+        "part_name": "M10x40六角头螺栓",
+        "params": {"d": 10, "L": 40, "b": 25, "grade": "8.8", "material": "40Cr", "surface": "发黑处理"}
+      },
+      "timing_sec": {
+        "input": 10, "analysis": 15, "params": 15, "model": 45,
+        "view3d": 15, "drawing": 10, "review": 35, "report": 15, "buffer": 20
+      }
+    },
+    {
+      "id": "motor_shaft",
+      "name": "500Nm 电机传动轴（工业级案例）",
+      "input": "设计一个用于500Nm电机输出的阶梯轴，材料45钢，长度300mm，安装轴承和联轴器",
+      "expected": {
+        "part_type": "shaft",
+        "part_name": "500Nm电机传动轴",
+        "params": {
+          "segments": [{"d": 45, "L": 80}, {"d": 45, "L": 45}, {"d": 50, "L": 70}, {"d": 45, "L": 45}, {"d": 45, "L": 60}],
+          "chamfer": 2.0, "fillet": 1.5,
+          "keyway": {"enabled": true, "seg_index": 0, "w": 14, "t": 5.5, "lk": 63},
+          "material": "45钢"
+        }
+      },
+      "review_torque_nm": 500,
+      "timing_sec": {
+        "input": 10, "analysis": 15, "params": 20, "model": 45,
+        "view3d": 15, "drawing": 10, "review": 40, "report": 15, "buffer": 10
+      }
+    }
+  ],
+  "steps": [
+    {
+      "id": "input",
+      "title": "1. 用户输入需求",
+      "subtitle": "自然语言描述机械零件",
+      "description": "支持：六角头螺栓 / 阶梯轴 / 法兰盘 / 直齿圆柱齿轮，自动识别材料、性能等级、表面处理等"
+    },
+    {
+      "id": "analysis",
+      "title": "2. AI 分析",
+      "subtitle": "DeepSeek 大模型参数抽取",
+      "description": "LLM 从自然语言中提取结构化参数，未配置 Key 时自动回退规则引擎"
+    },
+    {
+      "id": "params",
+      "title": "3. 设计参数",
+      "subtitle": "结构化参数 + 派生尺寸",
+      "description": "按 GB/T 标准自动补全派生尺寸（螺纹长度、键槽尺寸、分度圆等），可人工确认修改"
+    },
+    {
+      "id": "model",
+      "title": "4. FreeCAD 生成模型",
+      "subtitle": "无头参数化建模（OpenCascade）",
+      "description": "FreeCADCmd 子进程执行参数化建模，输出 FCStd / STEP / STL 三种格式"
+    },
+    {
+      "id": "view3d",
+      "title": "5. 三维模型",
+      "subtitle": "STL 网格 + WebGL 交互预览",
+      "description": "前端 three.js 渲染，支持旋转/缩放/自动旋转"
+    },
+    {
+      "id": "drawing",
+      "title": "6. 工程图",
+      "subtitle": "程序化 SVG 三视图 + 尺寸标注 + 标题栏",
+      "description": "国标第一角投影：主视图/俯视图/左视图，关键尺寸标注，A4 图框"
+    },
+    {
+      "id": "review",
+      "title": "7. AI 审查",
+      "subtitle": "三重质量把关",
+      "description": "① 决策系统规则（加工/强度/装配/标准 22 条）② STEP 模型审查（OpenCascade 特征）③ LLM 深度审查（标准条文引用）"
+    },
+    {
+      "id": "report",
+      "title": "8. 优化报告",
+      "subtitle": "设计报告落盘 reports/",
+      "description": "设计参数 / 风险分析 / 修改建议，Markdown + JSON 双格式"
+    }
+  ]
+}

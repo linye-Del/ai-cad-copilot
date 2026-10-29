@@ -1,0 +1,7 @@
+# Optional PDF text/graphics review.
+#
+# PyMuPDF is dual-licensed under AGPL-3.0 or a commercial Artifex license.
+# It is intentionally NOT part of requirements.txt. Install this extra only if
+# you accept the AGPL-3.0 obligations for your use and distribution scenario.
+# See THIRD_PARTY_NOTICES.md.
+pymupdf>=1.24,<2

@@ -1,0 +1,9 @@
+@echo off
+chcp 65001 >nul
+echo [1/3] 安装 Python 依赖...
+pip install -r requirements.txt
+echo [2/3] 检查 FreeCAD...
+python -c "from config import settings; print('FreeCADCmd:', settings.find_freecad_cmd())"
+echo [3/3] 启动 AI CAD Copilot...
+streamlit run app.py
+pause

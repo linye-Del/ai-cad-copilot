@@ -1,0 +1,41 @@
+{
+  "case": {
+    "id": "motor_shaft_demo",
+    "name": "电机传动轴设计 Demo",
+    "industry": "电机传动",
+    "duration_target_sec": 180,
+    "purpose": "GitHub 展示与面试演示：AI 完成完整机械设计流程（需求→理解→推荐→CAD→工程图→审查→优化）"
+  },
+  "input": {
+    "text": "设计一个500Nm电机输出轴，45钢，长度300mm，需要安装轴承和联轴器",
+    "requirements": {
+      "torque_nm": 500,
+      "total_length_mm": 300,
+      "material": "45钢",
+      "mounting": ["轴承", "联轴器"]
+    }
+  },
+  "design_constraints": {
+    "torque_allow_stress_mpa": 40,
+    "keyway_weaken_factor": 1.08,
+    "bearing_series": "6209",
+    "coupling_type": "弹性套柱销联轴器 LT8",
+    "chamfer": 2.0,
+    "fillet": 1.5
+  },
+  "workflow": [
+    {"id": "input", "title": "用户需求"},
+    {"id": "analysis", "title": "AI 需求理解"},
+    {"id": "recommend", "title": "机械参数推荐"},
+    {"id": "model", "title": "FreeCAD CAD 生成"},
+    {"id": "drawing", "title": "工程图生成"},
+    {"id": "review", "title": "CAD 智能审查"},
+    {"id": "report", "title": "优化建议输出"}
+  ],
+  "outputs": {
+    "demo_output_json": "demo_output.json",
+    "demo_report_md": "demo_report.md",
+    "model_fcstd": "model.FCStd",
+    "drawing_svg": "drawing.svg"
+  }
+}

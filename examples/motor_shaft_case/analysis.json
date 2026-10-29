@@ -1,0 +1,33 @@
+{
+  "consistency": {
+    "power_kw": 15,
+    "speed_rpm": 1450,
+    "torque_nm_input": 500,
+    "torque_from_power": 98.8,
+    "note": "15kW @ 1450rpm 理论扭矩 T=9550P/n=98.8N·m，与输入 500N·m 不一致（对应功率约 75.9kW）。按更保守的 500N·m 设计。"
+  },
+  "analysis": {
+    "condition": "扭矩 500N·m / 轴径 45mm / 材料 45钢",
+    "analysis": "扭矩 T=500N·m，轴径 d=45mm，材料 45钢：实际扭转应力 τ=27.9MPa，许用 [τ]=40MPa，安全系数 n=1.43。",
+    "risk": "中风险",
+    "risk_level": "medium",
+    "recommendation": "轴径建议增加至 55mm（n≥1.5），或改用高强度材料",
+    "standard": "GB/T 699（材料力学性能）/ 机械设计手册（扭转强度校核）",
+    "design": {
+      "torque_nm": 500,
+      "diameter": 45,
+      "material": "45钢",
+      "length": 300,
+      "tau_actual_mpa": 27.9,
+      "tau_allow_mpa": 40,
+      "d_min_mm": 39.9,
+      "recommend_d_range_mm": [
+        45,
+        55
+      ],
+      "safety_factor": 1.43,
+      "recommend_material": "45钢（调质 217~255HBW）（通用传动轴）",
+      "sigma_yield_mpa": 355
+    }
+  }
+}

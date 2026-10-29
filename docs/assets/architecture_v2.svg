@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="940" viewBox="0 0 1500 940" role="img" aria-labelledby="title desc">
+  <title id="title">AI CAD Copilot architecture</title>
+  <desc id="desc">Natural language goes through PartSpec and Design Engine into a typed CadPlan, then over a localhost WebSocket to the FreeCAD Add-on and the running FreeCAD GUI; TechDraw and inspection consume the same document.</desc>
+  <defs>
+    <style>
+      .bg { fill:#f7f9fc; }
+      .card { fill:#ffffff; stroke:#d7dee8; stroke-width:2; rx:14; }
+      .accent { fill:#eef2ff; stroke:#6366f1; stroke-width:2; rx:14; }
+      .green { fill:#ecfdf3; stroke:#12b76a; stroke-width:2; rx:14; }
+      .amber { fill:#fffaeb; stroke:#f79009; stroke-width:2; rx:14; }
+      .legacy { fill:#f8fafc; stroke:#98a2b3; stroke-width:2; stroke-dasharray:8 6; rx:14; }
+      .title { font:700 42px 'Segoe UI','Microsoft YaHei',sans-serif; fill:#101828; }
+      .sub { font:400 20px 'Segoe UI','Microsoft YaHei',sans-serif; fill:#475467; }
+      .h { font:700 19px 'Segoe UI','Microsoft YaHei',sans-serif; fill:#101828; }
+      .t { font:400 16px 'Segoe UI','Microsoft YaHei',sans-serif; fill:#344054; }
+      .small { font:400 14px 'Segoe UI','Microsoft YaHei',sans-serif; fill:#475467; }
+      .mono { font:600 14px 'Cascadia Code','Consolas',monospace; fill:#4338ca; }
+      .arrow { stroke:#667085; stroke-width:2.5; fill:none; marker-end:url(#arrow); }
+      .dasharrow { stroke:#98a2b3; stroke-width:2; fill:none; stroke-dasharray:7 6; marker-end:url(#arrowgray); }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#667085"/>
+    </marker>
+    <marker id="arrowgray" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#98a2b3"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1500" height="940"/>
+  <text class="title" x="52" y="68">AI CAD Copilot</text>
+  <text class="sub" x="52" y="104">Live FreeCAD path: typed plans, native features, same-document TechDraw</text>
+
+  <!-- Clients -->
+  <rect class="card" x="52" y="142" width="320" height="92"/>
+  <text class="h" x="72" y="176">Web UI / FreeCAD Dock / CLI</text>
+  <text class="t" x="72" y="204">Chinese natural-language request</text>
+
+  <!-- Plan chain -->
+  <rect class="accent" x="430" y="132" width="228" height="112"/>
+  <text class="h" x="450" y="165">Intent parser</text>
+  <text class="mono" x="450" y="193">agent/live_agent.py</text>
+  <text class="t" x="450" y="220">deterministic templates</text>
+
+  <rect class="accent" x="704" y="132" width="228" height="112"/>
+  <text class="h" x="724" y="165">PartSpec</text>
+  <text class="t" x="724" y="193">user / standard /</text>
+  <text class="t" x="724" y="218">design-engine / assumption</text>
+
+  <rect class="accent" x="978" y="132" width="228" height="112"/>
+  <text class="h" x="998" y="165">Design Engine</text>
+  <text class="mono" x="998" y="193">knowledge_base</text>
+  <text class="t" x="998" y="220">dimensions and rules</text>
+
+  <rect class="accent" x="1252" y="132" width="196" height="112"/>
+  <text class="h" x="1272" y="165">CadPlan</text>
+  <text class="mono" x="1272" y="193">allow-list only</text>
+  <text class="t" x="1272" y="220">no arbitrary Python</text>
+
+  <path class="arrow" d="M372 188 H424"/>
+  <path class="arrow" d="M658 188 H698"/>
+  <path class="arrow" d="M932 188 H972"/>
+  <path class="arrow" d="M1206 188 H1246"/>
+
+  <!-- Gateway -->
+  <rect class="green" x="430" y="318" width="540" height="100"/>
+  <text class="h" x="452" y="351">FastAPI + WebSocket Gateway</text>
+  <text class="t" x="452" y="379">127.0.0.1 only · register / heartbeat / command / response / event</text>
+  <text class="mono" x="452" y="402">backend/freecad_gateway.py</text>
+  <path class="arrow" d="M1350 244 V285 H700 V312"/>
+
+  <!-- Add-on -->
+  <rect class="green" x="1030" y="294" width="418" height="148"/>
+  <text class="h" x="1052" y="327">FreeCAD Add-on / Workbench</text>
+  <text class="t" x="1052" y="356">bridge · command queue · observer</text>
+  <text class="t" x="1052" y="381">security.py allow-list · GUI-thread dispatch</text>
+  <text class="mono" x="1052" y="407">freecad_addon/AICADCopilot</text>
+  <text class="small" x="1052" y="429">Rejects non-localhost gateway URLs</text>
+  <path class="arrow" d="M970 368 H1024"/>
+
+  <!-- FreeCAD GUI -->
+  <rect class="amber" x="430" y="482" width="1018" height="208"/>
+  <text class="h" x="452" y="516">Running FreeCAD GUI (one process)</text>
+  <rect class="card" x="454" y="536" width="300" height="128"/>
+  <text class="h" x="474" y="568">Document</text>
+  <text class="t" x="474" y="596">Body / Origin / Sketch</text>
+  <text class="t" x="474" y="621">Pad / Pocket / Helix</text>
+  <text class="t" x="474" y="646">Chamfer / Fillet</text>
+
+  <rect class="card" x="780" y="536" width="300" height="128"/>
+  <text class="h" x="800" y="568">TechDraw</text>
+  <text class="t" x="800" y="596">page / views / dimensions</text>
+  <text class="t" x="800" y="621">title block / centrelines</text>
+  <text class="t" x="800" y="646">same Document as model</text>
+
+  <rect class="card" x="1106" y="536" width="318" height="128"/>
+  <text class="h" x="1126" y="568">Inspection</text>
+  <text class="t" x="1126" y="596">27 decision rules</text>
+  <text class="t" x="1126" y="621">STEP features / manufacturability</text>
+  <text class="t" x="1126" y="646">optional LLM review</text>
+
+  <path class="arrow" d="M1240 442 V476"/>
+  <path class="arrow" d="M604 604 H774"/>
+  <path class="arrow" d="M1080 604 H1100"/>
+
+  <!-- Outputs -->
+  <rect class="card" x="430" y="748" width="470" height="104"/>
+  <text class="h" x="452" y="781">Drawing validation and export</text>
+  <text class="t" x="452" y="809">DrawingLayoutEngine + DrawingValidator</text>
+  <text class="t" x="452" y="833">PASS before PDF is reported as valid</text>
+  <path class="arrow" d="M930 650 V700 H700 V742"/>
+
+  <rect class="card" x="940" y="748" width="508" height="104"/>
+  <text class="h" x="962" y="781">Artifacts</text>
+  <text class="t" x="962" y="809">FCStd · TechDraw PDF · result JSON · inspection report</text>
+  <text class="t" x="962" y="833">all tied to the same live Document</text>
+  <path class="arrow" d="M1150 650 V700 H1194 V742"/>
+
+  <!-- Legacy -->
+  <rect class="legacy" x="52" y="758" width="320" height="94"/>
+  <text class="h" x="72" y="791">Legacy compatibility</text>
+  <text class="t" x="72" y="818">LangChain / MCP agent</text>
+  <text class="small" x="72" y="840">FreeCADCmd subprocess · offline files</text>
+  <path class="dasharrow" d="M372 805 H424"/>
+
+  <text class="small" x="52" y="902">MIT-licensed project code · FreeCAD is a separate LGPL-2.1+ runtime dependency · PyMuPDF is optional and AGPL-3.0/commercial.</text>
+</svg>

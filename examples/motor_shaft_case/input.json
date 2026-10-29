@@ -1,0 +1,18 @@
+{
+  "case": {
+    "id": "motor_shaft_case",
+    "name": "电机传动轴设计（完整工业案例）",
+    "industry": "电机传动"
+  },
+  "user_input": {
+    "power_kw": 15,
+    "speed_rpm": 1450,
+    "torque_nm": 500,
+    "total_length_mm": 300,
+    "material": "45钢",
+    "mounting": [
+      "轴承",
+      "联轴器"
+    ]
+  }
+}

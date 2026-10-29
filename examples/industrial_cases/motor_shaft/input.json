@@ -1,0 +1,31 @@
+{
+  "case": {
+    "id": "motor_shaft",
+    "name": "电机传动轴设计",
+    "industry": "电机传动",
+    "objective": "展示 AI 完成完整机械设计流程：需求解析 → 参数推荐 → 建模 → 工程图 → 审查 → 报告",
+    "standard_refs": ["GB/T 699（45钢）", "GB/T 276（轴承）", "GB/T 1095（键槽）", "GB/T 1801（配合）"]
+  },
+  "user_input": {
+    "text": "设计一个电机输出轴：扭矩500Nm，长度300mm，材料45钢，安装轴承和联轴器",
+    "requirements": {
+      "torque_nm": 500,
+      "total_length_mm": 300,
+      "material": "45钢",
+      "mounting": ["轴承", "联轴器"]
+    }
+  },
+  "design_constraints": {
+    "torque_allow_stress_mpa": 40,
+    "keyway_weaken_factor": 1.08,
+    "bearing_series": "6209",
+    "coupling_type": "弹性套柱销联轴器 LT8",
+    "chamfer": 2.0,
+    "fillet": 1.5
+  },
+  "outputs": {
+    "design_report": "design_report.md",
+    "model": "model.FCStd",
+    "drawing": "drawing.svg"
+  }
+}

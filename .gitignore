@@ -1,0 +1,104 @@
+# ===== Secrets / local configuration =====
+.env
+.env.*
+!.env.example
+secrets*
+credentials*
+*.pem
+*.key
+*.pfx
+*.p12
+id_rsa*
+id_ed25519*
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+/dist/
+.venv/
+venv/
+.pytest_cache/
+.pytest-tmp/
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# ===== Runtime output =====
+logs/
+output/
+reports/
+tmp/
+work/
+.freecad_gui/
+*.log
+*.pid
+*.stop
+backend.lifecycle.json
+FreeCAD_*.lock
+*.FCStd1
+*.FCStd2
+*.bak
+*.tmp
+
+# ===== Frontend =====
+frontend/node_modules/
+frontend/.vite/
+npm-debug.log*
+.npm-cache/
+# frontend/dist is intentionally tracked so a clean clone can be served without Node.js.
+
+# ===== Generated demo artifacts (inputs and curated case files stay tracked) =====
+examples/demo/demo_output.json
+examples/demo/demo_report.md
+examples/demo/model.FCStd
+examples/demo/drawing.svg
+examples/industrial_cases/*/model.FCStd
+examples/industrial_cases/*/drawing.svg
+examples/industrial_cases/*/design_report.md
+
+# ===== Private / internal material kept out of the public release =====
+docs/private/
+docs/internal/
+docs/resume.md
+docs/interview_qa.md
+docs/handover.md
+docs/startup_failure_root_cause.md
+docs/independent_windows_host_validation.md
+docs/one_click_start_validation.md
+docs/AI_CAD_2_*.md
+docs/upstream_*.md
+docs/benchmark.md
+docs/demo.md
+docs/demo_script.md
+docs/live_agent_migration_report.md
+
+# Exploratory screenshots that may contain local paths or duplicate evidence.
+docs/screenshots/upstream/
+docs/screenshots/startup/
+docs/screenshots/drawings/
+docs/screenshots/drawing_*.png
+docs/screenshots/drawing_*.svg
+docs/screenshots/web_ui.png
+docs/screenshots/live/11_web_live_agent_viewport.png
+
+# Old overview images retained locally but not used by the public README.
+docs/assets/hero_banner.png
+docs/assets/architecture.png
+docs/assets/architecture.svg
+docs/assets/cad_result.png
+docs/assets/demo_flow.png
+docs/assets/demo_flow.svg
+docs/assets/ui_screenshot.png
+
+# ===== IDE / OS =====
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

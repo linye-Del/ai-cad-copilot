@@ -1,0 +1,23 @@
+{
+  "plan_id": "freecad-api-probe",
+  "name": "AI CAD native shaft probe",
+  "part_type": "shaft",
+  "operations": [
+    {"id": "op01", "op": "create_document", "ref": "doc", "params": {"name": "LiveShaftProbe"}},
+    {"id": "op02", "op": "create_body", "ref": "body", "params": {"body": "$body", "name": "Body"}},
+    {"id": "op03", "op": "create_sketch", "ref": "sketch1", "params": {"body": "$body", "name": "Sketch", "z_offset": 0}},
+    {"id": "op04", "op": "add_geometry", "params": {"sketch": "$sketch1", "geometry": [{"type": "circle", "center": [0, 0], "radius": 15}]}},
+    {"id": "op05", "op": "add_constraint", "params": {"sketch": "$sketch1", "constraints": [{"type": "Diameter", "geometry": 0, "value": 30}]}},
+    {"id": "op06", "op": "create_pad", "ref": "pad1", "params": {"body": "$body", "profile": "$sketch1", "name": "Pad", "length": 75}},
+    {"id": "op07", "op": "create_sketch", "ref": "sketch2", "params": {"body": "$body", "name": "Sketch001", "z_offset": 75}},
+    {"id": "op08", "op": "add_geometry", "params": {"sketch": "$sketch2", "geometry": [{"type": "circle", "center": [0, 0], "radius": 20}]}},
+    {"id": "op09", "op": "add_constraint", "params": {"sketch": "$sketch2", "constraints": [{"type": "Diameter", "geometry": 0, "value": 40}]}},
+    {"id": "op10", "op": "create_pad", "ref": "pad2", "params": {"body": "$body", "profile": "$sketch2", "name": "Pad001", "length": 150}},
+    {"id": "op11", "op": "create_sketch", "ref": "sketch3", "params": {"body": "$body", "name": "Sketch002", "z_offset": 225}},
+    {"id": "op12", "op": "add_geometry", "params": {"sketch": "$sketch3", "geometry": [{"type": "circle", "center": [0, 0], "radius": 15}]}},
+    {"id": "op13", "op": "add_constraint", "params": {"sketch": "$sketch3", "constraints": [{"type": "Diameter", "geometry": 0, "value": 30}]}},
+    {"id": "op14", "op": "create_pad", "ref": "pad3", "params": {"body": "$body", "profile": "$sketch3", "name": "Pad002", "length": 75}},
+    {"id": "op15", "op": "create_chamfer", "ref": "chamfer", "params": {"body": "$body", "base": "$pad3", "name": "Chamfer", "size": 1, "selector": {"kind": "terminal_circular_edges"}}},
+    {"id": "op16", "op": "create_fillet", "ref": "fillet", "params": {"body": "$body", "base": "$chamfer", "name": "Fillet", "radius": 1, "selector": {"kind": "shoulder_circular_edges"}}}
+  ]
+}
