@@ -20,7 +20,8 @@ async def watch_freecad():
             if lines:
                 for l in lines:
                     parts = l.split(",")
-                    print(f"  [watch] freecadcmd pid={parts[1]} mem={parts[4].strip('\"')}", flush=True)
+                    mem = parts[4].strip('"')
+                    print(f"  [watch] freecadcmd pid={parts[1]} mem={mem}", flush=True)
             else:
                 print("  [watch] no freecadcmd", flush=True)
         except Exception as e:
