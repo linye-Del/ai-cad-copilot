@@ -52,7 +52,7 @@ preview，而不是稳定版或工业级产品。
 | 截图 | 5 |
 | 前端构建产物 | 3（`index.html` + JS + CSS） |
 | 最大文件 | `docs/screenshots/live/14_freecad_techdraw_delivery_clean.png`（305,833 bytes） |
-| 默认分支 commit | `10cfcfc`（报告本身在 tag 之后作为文档提交追加到 `main`） |
+| 报告提交 | 本报告在 tag 之后追加到 `main`；发布代码以 tag `v0.2.0` / `10cfcfc` 为准 |
 
 根目录包含：README、LICENSE、CHANGELOG、CONTRIBUTING、SECURITY、THIRD_PARTY_NOTICES、
 requirements、启动/停止脚本、Backend/Agent/CAD/Inspection/Knowledge/Frontend/Add-on/
